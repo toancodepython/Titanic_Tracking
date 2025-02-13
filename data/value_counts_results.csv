@@ -1,0 +1,4 @@
+Method,Class 0 Count,Class 1 Count
+Original,549,340
+SMOTE,549,549
+NearMiss,340,340
