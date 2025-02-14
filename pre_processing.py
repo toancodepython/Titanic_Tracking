@@ -26,7 +26,8 @@ for col in cate_cols:
 # Drop nhung cot khong can thiet
 df = df.drop(['Name', 'Ticket', 'Cabin', 'httpPassengerId'], axis=1)
 # chuẩn hóa giá trị
+
 scaler = MinMaxScaler()
-df_scaled  = scaler.fit_transform(df)
-df_scaled = pd.DataFrame(df_scaled, columns= df.columns)
-df_scaled.to_csv('./data/processed_data.csv')
+scaled_cols = ['Pclass', 'Age', 'Fare', 'Embarked']
+df[scaled_cols] = scaler.fit_transform(df[scaled_cols])
+df.to_csv('./data/processed_data.csv')
