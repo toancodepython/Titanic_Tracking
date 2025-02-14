@@ -6,14 +6,17 @@ from imblearn.over_sampling import SMOTE
 import pandas as pd
 import mlflow
 
-mlflow.set_experiment("Titanic Random Rorest")
+mlflow.set_experiment("Titanic Random Rorest 2")
 mlflow.set_tracking_uri('http://127.0.0.1:5000')
 # Load dữ liệu
 
 data = pd.read_csv('./data/processed_data.csv')
+data = data.iloc[:, 1:]
+
 X = data.drop(['Survived'], axis=1)
 y = data['Survived']
 
+print(X)
 # Xử lý mất cân bằng dữ liệu
 survived_counts = y.value_counts()
 print("\n Dữ liệu gốc: ")
@@ -23,6 +26,7 @@ print(survived_counts)
 smote = SMOTE(random_state=42)
 X_smote, y_smote = smote.fit_resample(X, y)
 df_smote = pd.concat([X_smote, y_smote], axis=1)
+print(df_smote)
 df_smote.to_csv('./data/smote_data.csv')
 print("\nPhân bố sau khi áp dụng SMOTE:")
 print(pd.Series(y_smote).value_counts())
@@ -31,6 +35,7 @@ print(pd.Series(y_smote).value_counts())
 nearmiss = NearMiss()
 X_nm, y_nm = nearmiss.fit_resample(X, y)
 df_nearmiss = pd.concat([X_nm, y_nm ], axis=1)
+print(df_nearmiss)
 df_nearmiss.to_csv('./data/nearmiss_data.csv')
 print("\nPhân bố sau khi áp dụng NearMiss:")
 print(pd.Series(y_nm).value_counts())
