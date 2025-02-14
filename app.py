@@ -33,6 +33,7 @@ if page == "Dữ liệu gốc":
 
 elif page == "Dữ liệu SMOTE":
     st.title("Dữ liệu SMOTE")
+    df_smote = df_smote.iloc[:, 1:]
     st.write(f"Số dòng: {df_smote.shape[0]} | Số cột: {df_smote.shape[1]}")
     st.dataframe(df_smote)
     if "Survived" in df_smote.columns:
@@ -44,6 +45,8 @@ elif page == "Dữ liệu SMOTE":
 elif page == "Dữ liệu Nearmiss":
     st.title("Dữ liệu Nearmiss")
     st.write(f"Số dòng: {df_nearmiss.shape[0]} | Số cột: {df_nearmiss.shape[1]}")
+    df_nearmiss = df_nearmiss.iloc[:, 1:]
+
     st.dataframe(df_nearmiss)
     if "Survived" in df_nearmiss.columns:
         st.subheader("Phân bố lớp trong dữ liệu gốc:")
@@ -54,7 +57,9 @@ elif page == "Dữ liệu Nearmiss":
 
 elif page == "Dữ liệu sau tiền xử lý":
     st.title("Dữ liệu sau tiền xử lý")
+    df_processed = df_processed.iloc[:, 1:]
     st.write(f"Số dòng: {df_processed.shape[0]} | Số cột: {df_processed.shape[1]}")
+
     st.dataframe(df_processed)
     if "Survived" in df_processed.columns:
         st.subheader("Phân bố lớp trong dữ liệu gốc:")
@@ -64,7 +69,7 @@ elif page == "Dữ liệu sau tiền xử lý":
 
 elif page == "Kết quả mô hình":
     st.title("Kết quả huấn luyện mô hình Random Forest")
-    method_selected = st.selectbox("🛠 Chọn phương pháp xử lý dữ liệu:", df_results["Method"].unique())
+    method_selected = st.selectbox(" Chọn phương pháp xử lý dữ liệu:", df_results["Method"].unique())
 
     # Lọc dữ liệu theo phương pháp
     df_filtered = df_results[df_results["Method"] == method_selected]
